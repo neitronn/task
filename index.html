@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="icons.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="test_task">
+        <div class="left-menu">
+            <ul class="menu-list">
+                <li class="menu-item ico-data active"><a href="#">данные</a></li>
+                <li class="menu-item ico-delivery"><a href="#">доставка</a></li>
+                <li class="menu-item ico-setting"><a href="#">настройки</a></li>
+                <li class="menu-item ico-support"><a href="#">поддержка</a></li>
+                <li class="menu-item ico-payment"><a href="#">оплата</a></li>
+            </ul>
+
+            <div class="menu-exit">
+                <a href="#" class="menu-item ico-exit">выйти</a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="header-mobile">
+            <a href="#" class="header-mobile__back"><span class="icon-arrow"></span></a>
+            <a href="#" class="header-mobile__logo">logo</a>
+            </div>
+            <div class="container">
+                <div class="top-content">
+                    <div class="content-ava">
+                        <img src="img/content/foto.jpg">
+                    </div>
+                    <div class="content-buttons">
+                        <button>Ваши адреса</button>
+                        <button>История заказов</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <form>
+                    <h4>О вас</h4>
+                    <div class="content-input">
+                        <label for="name">Имя</label>
+                        <input id="name" type="text" name="name" placeholder="Имя">
+                        <span class="assistive-text">Assistive text</span>
+                    </div>
+
+                    <div class="content-input">
+                        <label for="surname">Фамилия</label>
+                        <input id="surname" type="text" name="surname" placeholder="Фамилия">
+                        <span class="assistive-text">Assistive text</span>
+                    </div>
+
+                    <div class="content-input">
+                        <label for="date">Дата рождения</label>
+                        <input id="date" type="date" name="date" placeholder="Дата рождения">
+                        <span class="assistive-text">Assistive text</span>
+                    </div>
+
+                    <h4>Контакты</h4>
+                    <div class="content-input">
+                        <label for="telephone">Телефон</label>
+                        <input id="telephone" type="text" name="telephone" placeholder="Телефон">
+                        <span class="assistive-text">Assistive text</span>
+                    </div>
+
+                    <div class="content-input">
+                        <label for="email">Почта</label>
+                        <input id="email" type="text" name="email" placeholder="Почта">
+                        <span class="assistive-text">Assistive text</span>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="menu-mobile">
+            <span class="icon-house-1">главная</span>
+            <span class="icon-list-1">Каталог</span>
+            <span class="icon-bucket">Корзина</span>
+            <span class="icon-heart">Избранное</span>
+            <span class="icon-Frame-138 menu-mobile__active">Профиль</span>
+        </div>
+
+        <script>
+            const inputs = document.querySelectorAll('#test_task input'),
+            date_re = /^\d{4}\-\d{2}\-\d{2}$/i,
+            telephone_re = /^[\d\+][\d\(\)\ -]{4,14}\d$/,
+            email_re = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i,
+            valid = {
+                'name' : 'elem.value.length > 3',
+                'surname' : 'elem.value.length > 3',
+                'date': date_re + '.test(elem.value)',
+                'telephone' : telephone_re + '.test(elem.value)',
+                'email' : email_re + '.test(elem.value)'
+            };
+            inputs.forEach((elem) => {
+                elem.addEventListener('blur', () => {
+                    elem.parentElement.classList.add('not-empty');
+                    elem.parentElement.classList.remove('validation');
+                    elem.parentElement.classList.add('disabled');
+                    if (!elem.value.length) {
+                        elem.parentElement.classList.remove('not-empty');
+                        return false;
+                    }
+                    if (eval(valid[elem.getAttribute("name")])) {
+                        elem.parentElement.classList.remove('disabled');
+                        elem.parentElement.classList.add('validation');
+                    }
+                })
+            })
+        </script>
+    </div>
+</body>
+</html>
